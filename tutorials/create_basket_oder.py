@@ -1,23 +1,18 @@
-import grpc
 import time
-from uuid import uuid4
 from threading import Thread
-import utilities_pb2 as util
-import utilities_pb2_grpc as util_grpc
+from uuid import uuid4
+
+import grpc
 import order_pb2 as ord
 import order_pb2_grpc as ord_grpc
+import utilities_pb2 as util
+import utilities_pb2_grpc as util_grpc
+from example_base import ExampleBase
 
 
-class CreateBasketOrderExample:
+class CreateBasketOrderExample(ExampleBase):
     def __init__(self):
-        self.server = '__SERVER__'
-        self.user = '__USER__'
-        self.domain = '__DOMAIN__'
-        self.password = '__PASSWORD__'
-        self.locale = '__LOCALE__'
-        self.account = '__ACCOUNT__'
-        self.route = '__ROUTE__'
-        self.port = '__PORT__'
+        super().__init__()
 
     def callback(self, iter):
         try:
@@ -29,7 +24,7 @@ class CreateBasketOrderExample:
             print(e)
 
     def run(self):
-        with open(r'roots.pem', 'rb') as f:
+        with open(self.pem_path, 'rb') as f:
             cert = f.read()
 
         credentials = grpc.ssl_channel_credentials(root_certificates=cert)

@@ -1,0 +1,24 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug CreateBasketOrderExample",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "create_basket_oder.py",
+            "cwd": "${workspaceFolder}/tutorials",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Debug Tutorial 1",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "tutorial_1_connect_and_disconnect.py",
+            "cwd": "${workspaceFolder}/tutorials",
+            "console": "integratedTerminal"
+        }
+    ]
+}

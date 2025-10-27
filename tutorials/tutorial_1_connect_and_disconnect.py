@@ -1,18 +1,15 @@
 import grpc
 import utilities_pb2 as util
 import utilities_pb2_grpc as util_grpc
+from example_base import ExampleBase
 
 
-class ConnectAndDisconnectExample:
+class ConnectAndDisconnectExample(ExampleBase):
     def __init__(self):
-        self.server = '__SERVER__'
-        self.user = '__USER__'
-        self.domain = '__DOMAIN__'
-        self.password = '__PASSWORD__'
-        self.locale = '__LOCALE__'
+        super().__init__()
 
     def run(self):
-        with open(r'roots.pem', 'rb') as f:
+        with open(self.pem_path, 'rb') as f:
             cert = f.read()
         channel = grpc.secure_channel(
             f'{self.server}:{self.port}',
@@ -30,7 +27,9 @@ class ConnectAndDisconnectExample:
         print('Connect result: ', connect_response.Response)
 
         if connect_response.Response == 'success':
-            disconnect_response = util_stub.Disconnect(util.DisconnectRequest(UserToken=connect_response.UserToken))
+            disconnect_response = util_stub.Disconnect(
+                util.DisconnectRequest(UserToken=connect_response.UserToken)
+            )
             print('Disconnect result: ', disconnect_response.ServerResponse)
 
 
