@@ -32,7 +32,10 @@ where = ["src"]
 "" = "src"
 
 [tool.setuptools.package-data]
-"xapi_client" = ["data/*.json"]
+"xapi_client" = [
+    "data/*.json",
+    "resources/*.pem"
+]
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]
