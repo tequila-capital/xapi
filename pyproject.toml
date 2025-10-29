@@ -1,7 +1,7 @@
 [project]
-name = "titania_xapi_client"
+name = "xapi_client"
 version = "0.0.1"
-description = "Titania xAPI client"
+description = "xAPI client"
 authors = [
     { name = "Augusto Gonzalez", email = "agonzalez@tequila.capital" },
 ]
@@ -17,9 +17,9 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/tequila-capital/titania_xapi_client"
-Repository = "https://github.com/tequila-capital/titania_xapi_client.git"
-"Bug Tracker" = "https://github.com/tequila-capital/titania_xapi_client/issues"
+Homepage = "https://github.com/tequila-capital/xapi_client"
+Repository = "https://github.com/tequila-capital/xapi_client.git"
+"Bug Tracker" = "https://github.com/tequila-capital/xapi_client/issues"
 
 [build-system]
 requires = ["setuptools>=64", "wheel"]
@@ -32,7 +32,7 @@ where = ["src"]
 "" = "src"
 
 [tool.setuptools.package-data]
-"titania_incubator" = ["data/*.json"]
+"xapi_client" = ["data/*.json"]
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]
