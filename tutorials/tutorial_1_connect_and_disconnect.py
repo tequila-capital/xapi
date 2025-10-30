@@ -13,7 +13,7 @@ class ConnectAndDisconnectExample(ExampleBase):
             cert = f.read()
         channel = grpc.secure_channel(
             f'{self.server}:{self.port}',
-            grpc.ssl_channel_credentials(root_certificates=cert)
+            grpc.ssl_channel_credentials(root_certificates=cert),
         )
 
         util_stub = util_grpc.UtilityServicesStub(channel)
@@ -21,7 +21,7 @@ class ConnectAndDisconnectExample(ExampleBase):
             UserName=self.user,
             Domain=self.domain,
             Password=self.password,
-            Locale=self.locale
+            Locale=self.locale,
         )
         connect_response = util_stub.Connect(connect_request)
         print('Connect result: ', connect_response.Response)
@@ -33,6 +33,6 @@ class ConnectAndDisconnectExample(ExampleBase):
             print('Disconnect result: ', disconnect_response.ServerResponse)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     example = ConnectAndDisconnectExample()
     example.run()
