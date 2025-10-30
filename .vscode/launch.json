@@ -43,6 +43,22 @@
             "program": "tutorial_4_execution_details.py",
             "cwd": "${workspaceFolder}/tutorials",
             "console": "integratedTerminal"
+        },
+        {
+            "name": "Debug Tutorial 5",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "tutorial_5_cancel_order.py",
+            "cwd": "${workspaceFolder}/tutorials",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Debug Tutorial 6",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "tutorial_6_market_data.py",
+            "cwd": "${workspaceFolder}/tutorials",
+            "console": "integratedTerminal"
         }
     ]
 }
