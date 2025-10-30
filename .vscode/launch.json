@@ -35,6 +35,14 @@
             "program": "tutorial_3_order_details.py",
             "cwd": "${workspaceFolder}/tutorials",
             "console": "integratedTerminal"
+        },
+        {
+            "name": "Debug Tutorial 4",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "tutorial_4_execution_details.py",
+            "cwd": "${workspaceFolder}/tutorials",
+            "console": "integratedTerminal"
         }
     ]
 }
