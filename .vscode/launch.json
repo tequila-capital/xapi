@@ -27,6 +27,14 @@
             "program": "tutorial_2_place_order.py",
             "cwd": "${workspaceFolder}/tutorials",
             "console": "integratedTerminal"
+        },
+        {
+            "name": "Debug Tutorial 3",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "tutorial_3_order_details.py",
+            "cwd": "${workspaceFolder}/tutorials",
+            "console": "integratedTerminal"
         }
     ]
 }

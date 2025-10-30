@@ -1,42 +1,42 @@
 from io import StringIO
+
 import grpc
+import pandas as pd
 import utilities_pb2 as util
 import utilities_pb2_grpc as util_grpc
-import pandas as pd
+from example_base import ExampleBase
 
 
-class OrderDetailsExample:
+class OrderDetailsExample(ExampleBase):
     def __init__(self):
-        self.server = '__SERVER__'
-        self.port = '__PORT__'
-        self.user = '__USER__'
-        self.password = '__PASSWORD__'
-        self.domain = '__DOMAIN__'
-        self.locale = '__LOCALE__'
+        super().__init__()
         self.my_order_id = 'MyOrderId'
 
     def run(self):
-        with open(r'roots.pem', 'rb') as f:
+        with open(self.pem_path, 'rb') as f:
             cert = f.read()
         channel = grpc.secure_channel(
             f'{self.server}:{self.port}',
-            grpc.ssl_channel_credentials(root_certificates=cert)
+            grpc.ssl_channel_credentials(root_certificates=cert),
         )
         util_stub = util_grpc.UtilityServicesStub(channel)
 
-        connect_response = util_stub.Connect(util.ConnectRequest(
-            UserName=self.user,
-            Domain=self.domain,
-            Password=self.password,
-            Locale=self.locale
-        ))
+        connect_response = util_stub.Connect(
+            util.ConnectRequest(
+                UserName=self.user,
+                Domain=self.domain,
+                Password=self.password,
+                Locale=self.locale,
+            )
+        )
         print('Connect result: ', connect_response.Response)
 
         if connect_response.Response == 'success':
-            activity_response = util_stub.GetTodaysActivityJson(util.TodaysActivityJsonRequest(
-                IncludeUserSubmitOrder=True,
-                UserToken=connect_response.UserToken
-            ))
+            activity_response = util_stub.GetTodaysActivityJson(
+                util.TodaysActivityJsonRequest(
+                    IncludeUserSubmitOrder=True, UserToken=connect_response.UserToken
+                )
+            )
             # Assuming activity_response.TodaysActivityJson contains the JSON string
             json_str = activity_response.TodaysActivityJson
 
@@ -49,12 +49,12 @@ class OrderDetailsExample:
                 xapi_order_id = df.loc[df['OrderTag'] == self.my_order_id, 'OrderId'].values[0]
                 print('The xAPI OrderId for my order is ', xapi_order_id)
 
-            disconnect_response = util_stub.Disconnect(util.DisconnectRequest(
-                UserToken=connect_response.UserToken
-            ))
+            disconnect_response = util_stub.Disconnect(
+                util.DisconnectRequest(UserToken=connect_response.UserToken)
+            )
             print('Disconnect result: ', disconnect_response.ServerResponse)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     example = OrderDetailsExample()
     example.run()
