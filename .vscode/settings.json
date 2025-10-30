@@ -1,0 +1,7 @@
+{
+    "editor.formatOnSave": true,
+    "python.formatter.provider": "ruff",
+    "ruff.enable": true,
+    "ruff.lintOnSave": true,
+    "ruff.formatOnSave": true
+}

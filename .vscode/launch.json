@@ -19,6 +19,14 @@
             "program": "tutorial_1_connect_and_disconnect.py",
             "cwd": "${workspaceFolder}/tutorials",
             "console": "integratedTerminal"
+        },
+        {
+            "name": "Debug Tutorial 2",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "tutorial_2_place_order.py",
+            "cwd": "${workspaceFolder}/tutorials",
+            "console": "integratedTerminal"
         }
     ]
 }
