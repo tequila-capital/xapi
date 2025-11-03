@@ -142,23 +142,78 @@ class XapiClient:
 
         raise (RuntimeError('Client not connected'))
 
-    def cancel_order(self):
+    def cancel_order(self, order_tag: str) -> ord.ChangeSingleOrderResponse:
         if self.is_connected():
             try:
                 ord_stub = ord_grpc.SubmitOrderServiceStub(self.__channel)
-                # order_request = ord.SubmitSingleOrderRequest(
-                #     Symbol=symbol,
-                #     Side=side,
-                #     Quantity=quantity,
-                #     Route=self.__route,
-                #     Account=self.__account,
-                #     OrderTag=order_tag,
-                #     UserToken=self.__get_token(),
-                # )
 
-                # order_response = ord_stub.SubmitSingleOrder(order_request)
+                cancel_request = ord.CancelSingleOrderRequest(
+                    OrderId=order_tag,
+                    UserToken=self.__get_token(),
+                )
 
-                # return order_response
+                cancel_response = ord_stub.CancelSingleOrder(cancel_request)
+
+                return cancel_response
+            except Exception as e:
+                print(f'{e}')
+
+        raise (RuntimeError('Client not connected'))
+
+    def get_order_detail_by_order_id(self, order_id: str) -> list[ord.OrderDetailsResponse]:
+        if self.is_connected():
+            try:
+                ord_stub = ord_grpc.SubmitOrderServiceStub(self.__channel)
+
+                detail_request = ord.OrderDetailByOrderIdRequest(
+                    OrderId=order_id,
+                    UserToken=self.__get_token(),
+                )
+
+                detail_response = ord_stub.GetOrderDetailByOrderId(detail_request)
+
+                return detail_response
+            except Exception as e:
+                print(f'{e}')
+
+        raise (RuntimeError('Client not connected'))
+
+    # TODO; Finish implementation
+    # def get_order_detail_by_date_range(self, param):
+    #     if self.is_connected():
+    #         try:
+    #             ord_stub = ord_grpc.SubmitOrderServiceStub(self.__channel)
+
+    #             detail_request = ord.OrderDetailByDateRangeRequest(
+    #                 UserToken=self.__get_token(),
+    #             )
+
+    #             detail_response = ord_stub.GetOrderDetailByDateRange(detail_request)
+
+    #             return detail_response
+    #         except Exception as e:
+    #             print(f'{e}')
+
+    #     raise (RuntimeError('Client not connected'))
+
+    def get_order_detail_by_order_tag(
+        self,
+        order_tags: list[str],
+        event_type: str,
+    ) -> list[ord.OrderDetailsResponse]:
+        if self.is_connected():
+            try:
+                ord_stub = ord_grpc.SubmitOrderServiceStub(self.__channel)
+
+                detail_request = ord.OrderDetailByOrderTagRequest(
+                    OrderTags=order_tags,
+                    OrderEventType=event_type,
+                    UserToken=self.__get_token(),
+                )
+
+                detail_response = ord_stub.GetOrderDetailByOrderTag(detail_request)
+
+                return detail_response
             except Exception as e:
                 print(f'{e}')
 
